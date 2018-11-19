@@ -1,9 +1,9 @@
 var a = 0;
-var img;
+var pinky;
 
 function setup() {
-  createCanvas(666, 666);
-  img = loadImage("./Sourse/FullHead.svg");
+  createCanvas(windowWidth - 17, 500);
+  pinky = new PinkiePie();
 }
 
 function draw() {
@@ -13,7 +13,7 @@ function draw() {
   push();
   translate(width / 2, height / 2);
   rotate(-(a / 1000) * PI);
-  image(img, -width / 12, -height / 12, width / 6, height / 6);
+  pinky.Show();
   pop();
 
   a++;
