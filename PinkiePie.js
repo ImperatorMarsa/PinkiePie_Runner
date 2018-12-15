@@ -1,9 +1,12 @@
 class PinkiePie {
   constructor() {
-    this.img = loadImage("./Sourse/FullHead.svg");
+    this.head = loadImage("./Sourse/FullHead.svg");
+    this.body = loadImage("./Sourse/Body.svg");
   }
 
   Show() {
-    image(this.img, -100, -100, 200, 200);
+    var sizes=300
+    image(this.body, -sizes/2, -sizes/2, sizes, sizes);
+    image(this.head, -sizes/2+sizes*.1, -sizes/2-sizes*.2, sizes, sizes);
   }
 }

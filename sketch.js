@@ -7,7 +7,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(73);
   line(0, 0, mouseX, mouseY);
 
   push();
