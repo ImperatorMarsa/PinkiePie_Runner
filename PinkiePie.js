@@ -39,6 +39,8 @@ class PinkiePie {
     if (this.ground >= this.y) {
       this.y += this.speed + this.gravity / 2;
       this.speed += this.gravity;
+    } else {
+      this.y = this.ground;
     }
   }
 }
