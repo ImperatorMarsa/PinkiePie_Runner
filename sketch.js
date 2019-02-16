@@ -1,23 +1,12 @@
-var a = 0;
 var pinky;
 
 function setup() {
-  createCanvas(windowWidth - 17, 500);
-  pinky = new PinkiePie();
+  createCanvas(windowWidth, windowHeight - 5);
+  pinky = new PinkiePie(0, 0, 200);
 }
 
 function draw() {
-  background(73);
-  line(0, 0, mouseX, mouseY);
+  background(20, 130, 255);
 
-  push();
-  translate(width / 2, height / 2);
-  rotate(-(a / 1000) * PI);
   pinky.Show();
-  pop();
-
-  a++;
-  if (a > 100000) {
-    a = 0;
-  }
 }
