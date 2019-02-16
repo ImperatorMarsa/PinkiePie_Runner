@@ -3,14 +3,19 @@ class PinkiePie {
     this.sizes = sizes;
     this.x = x;
     this.y = y;
+    this.ground = y;
 
-    this.head = loadImage("./Sourse/FullHead.svg");
-    this.body = loadImage("./Sourse/Body.svg");
+    this.speed = 0;
+    this.gravity = 0.5;
+    this.head = loadImage("./Sources/FullHead.svg");
+    this.body = loadImage("./Sources/Body.svg");
   }
 
   Show() {
     push();
+
     translate(this.x, this.y);
+
     image(this.body, -this.sizes / 2, -this.sizes / 2, this.sizes, this.sizes);
     image(
       this.head,
@@ -19,5 +24,21 @@ class PinkiePie {
       this.sizes,
       this.sizes
     );
+
+    pop();
+    this.Dynamic();
+  }
+  Jump(ground) {
+    if (this.ground <= this.y) {
+      this.ground = ground;
+      this.speed = -17;
+      this.y += this.speed + this.gravity / 2;
+    }
+  }
+  Dynamic() {
+    if (this.ground >= this.y) {
+      this.y += this.speed + this.gravity / 2;
+      this.speed += this.gravity;
+    }
   }
 }
