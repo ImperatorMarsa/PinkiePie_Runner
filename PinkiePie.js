@@ -36,7 +36,7 @@ class PinkiePie {
     }
   }
   Dynamic() {
-    if (this.ground >= this.y) {
+    if (this.ground > this.y) {
       this.y += this.speed + this.gravity / 2;
       this.speed += this.gravity;
     } else {
