@@ -49,7 +49,6 @@ class Desert {
       this.cactusis[i].x -= this.speed*50;
       if (this.cactusis[i].x < -10) {
         this.cactusis.splice(i, 1);
-        console.log(this.cactusis);
         let X = width * (1 + random(1, 5));
         let Y = this.y;
         this.cactusis.push(new Cactus(X, Y));
