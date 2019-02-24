@@ -13,7 +13,7 @@ class PinkiePie {
 
   Show() {
     push();
-
+ 
     translate(this.x, this.y);
 
     image(this.body, -this.sizes / 2, -this.sizes / 2, this.sizes, this.sizes);
@@ -41,6 +41,16 @@ class PinkiePie {
       this.speed += this.gravity;
     } else {
       this.y = this.ground;
+    }
+  }
+  Collision(cactus) {
+    if (
+      cactus.x < this.x + this.sizes / 2 &&
+      cactus.x > this.x - this.sizes / 2 &&
+      cactus.y < this.y + this.sizes / 2 &&
+      cactus.y > this.y - this.sizes / 2
+    ) {
+      return true;
     }
   }
 }

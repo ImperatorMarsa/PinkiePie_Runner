@@ -1,11 +1,19 @@
 class Desert {
-  constructor(y, sizes) {
+  constructor(y) {
     this.y = y;
 
     this.dist = 0;
     this.speed = 0.2;
     this.boost = 0.001;
     this.counter = 0;
+
+    this.cactusis = [];
+    for (let i = 0; i < 7; i++) {
+      let I = random(1, 2) * i;
+      let X = width * (1 + random(1 * I, 5 * I));
+      let Y = this.y;
+      this.cactusis.push(new Cactus(X, Y));
+    }
   }
 
   Show() {
@@ -36,5 +44,16 @@ class Desert {
       this.counter = 0;
     }
     this.counter++;
+
+    for (let i = 0; i < this.cactusis.length; i++) {
+      this.cactusis[i].x -= this.speed*50;
+      if (this.cactusis[i].x < -10) {
+        this.cactusis.splice(i, 1);
+        console.log(this.cactusis);
+        let X = width * (1 + random(1, 5));
+        let Y = this.y;
+        this.cactusis.push(new Cactus(X, Y));
+      }
+    }
   }
 }
