@@ -34,6 +34,7 @@ class PinkiePie {
         pop();
         this.Dynamic();
     }
+
     Jump(ground) {
         if (this.ground <= this.y) {
             this.ground = ground;
@@ -41,6 +42,7 @@ class PinkiePie {
             this.y += this.speed + this.gravity / 2;
         }
     }
+
     Dynamic() {
         if (this.ground > this.y) {
             this.y += this.speed + this.gravity / 2;
@@ -49,6 +51,7 @@ class PinkiePie {
             this.y = this.ground;
         }
     }
+
     Collision(cactus) {
         if (
             cactus.x < this.x + this.sizes / 2 &&

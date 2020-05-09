@@ -23,6 +23,8 @@
         ></script>
         <!-- <script language="javascript" type="text/javascript" src="./libs/p5.speech.js"></script> -->
 
+        <script src="./libs/p2.js"></script>
+
         <script src="Cloud.js"></script>
         <script src="Cactus.js"></script>
         <script src="Desert.js"></script>
@@ -30,5 +32,12 @@
         <script src="sketch.js"></script>
     </head>
 
-    <body></body>
+    <body>
+        <!-- The canvas, where we draw stuff -->
+        <canvas id="myCanvas"></canvas>
+
+        <script>
+            gameStart(document.getElementById("myCanvas"));
+        </script>
+    </body>
 </html>
