@@ -1,5 +1,6 @@
 let pinky;
 let desert;
+
 function setup() {
     createCanvas(windowWidth, windowHeight - 5);
 
