@@ -3,93 +3,63 @@ let desert;
 
 // pinky = new PinkiePie(330, 330, 200);
 // desert = new Desert((height * 4) / 5);
+let world;
+let circleBody;
+let planeBody;
 
-function gameStart(canvas) {
-    let ctx, w, h, world, boxBody, planeBody;
-    init();
-    animate();
+function setup() {
+    createCanvas(windowWidth, windowHeight);
 
-    function init() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    world = new p2.World();
 
-        w = canvas.width;
-        h = canvas.height;
+    let circleShape = new p2.Circle({ radius: 20 });
+    circleBody = new p2.Body({
+        mass: 1,
+        position: [0, 60],
+        angularVelocity: 10,
+    });
+    circleBody.addShape(circleShape);
+    world.addBody(circleBody);
 
-        ctx = canvas.getContext("2d");
-        ctx.lineWidth = 0.05;
+    // Add a plane
+    let planeShape = new p2.Plane();
+    planeBody = new p2.Body();
+    planeBody.addShape(planeShape);
+    world.addBody(planeBody);
+}
 
-        // Init p2.js
-        world = new p2.World();
+function drawСircle() {
+    let x = circleBody.position[0],
+        y = circleBody.position[1];
 
-        // Add a box
-        boxShape = new p2.Box({ width: 2, height: 1 });
-        boxBody = new p2.Body({
-            mass: 1,
-            position: [0, 3],
-            angularVelocity: 1,
-        });
-        boxBody.addShape(boxShape);
-        world.addBody(boxBody);
+    push();
 
-        // Add a plane
-        planeShape = new p2.Plane();
-        planeBody = new p2.Body();
-        planeBody.addShape(planeShape);
-        world.addBody(planeBody);
-    }
+    translate(x, y);
+    rotate(circleBody.angle);
+    circle(0, 0, 2 * circleBody.boundingRadius);
 
-    function drawbox() {
-        ctx.beginPath();
-        let x = boxBody.position[0],
-            y = boxBody.position[1];
-        ctx.save();
-        ctx.translate(x, y); // Translate to the center of the box
-        ctx.rotate(boxBody.angle); // Rotate to the box body frame
-        ctx.rect(
-            -boxShape.width / 2,
-            -boxShape.height / 2,
-            boxShape.width,
-            boxShape.height
-        );
-        ctx.stroke();
-        ctx.restore();
-    }
+    line(0, 0, 0, circleBody.boundingRadius);
+    rotate((2 * PI) / 3);
+    line(0, 0, 0, circleBody.boundingRadius);
+    rotate((2 * PI) / 3);
+    line(0, 0, 0, circleBody.boundingRadius);
 
-    function drawPlane() {
-        let y = planeBody.position[1];
-        ctx.moveTo(-w, y);
-        ctx.lineTo(w, y);
-        ctx.stroke();
-    }
+    pop();
+}
 
-    function render() {
-        // Clear the canvas
-        ctx.clearRect(0, 0, w, h);
+function drawPlane() {
+    let y = planeBody.position[1];
+    line(-windowWidth / 2, y, windowWidth / 2, y);
+}
 
-        // Transform the canvas
-        // Note that we need to flip the y axis since Canvas pixel coordinates
-        // goes from top to bottom, while physics does the opposite.
-        ctx.save();
-        ctx.translate(w / 2, h / 2); // Translate to the center
-        ctx.scale(50, -50); // Zoom in and flip y axis
+// Animation loop
+function draw() {
+    background(255);
+    translate(windowWidth / 2, windowHeight / 2);
+    rotate(PI);
 
-        // Draw all bodies
-        drawbox();
-        drawPlane();
+    world.step(1/60);
 
-        // Restore transform
-        ctx.restore();
-    }
-
-    // Animation loop
-    function animate() {
-        requestAnimationFrame(animate);
-
-        // Move physics bodies forward in time
-        world.step(1 / 60);
-
-        // Render scene
-        render();
-    }
+    drawСircle();
+    drawPlane();
 }
