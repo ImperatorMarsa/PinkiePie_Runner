@@ -7,27 +7,6 @@ let world;
 let circleBody;
 let planeBody;
 
-function setup() {
-    createCanvas(windowWidth, windowHeight);
-
-    world = new p2.World();
-
-    let circleShape = new p2.Circle({ radius: 20 });
-    circleBody = new p2.Body({
-        mass: 1,
-        position: [0, 60],
-        angularVelocity: 10,
-    });
-    circleBody.addShape(circleShape);
-    world.addBody(circleBody);
-
-    // Add a plane
-    let planeShape = new p2.Plane();
-    planeBody = new p2.Body();
-    planeBody.addShape(planeShape);
-    world.addBody(planeBody);
-}
-
 function drawСircle() {
     let x = circleBody.position[0],
         y = circleBody.position[1];
@@ -52,7 +31,26 @@ function drawPlane() {
     line(-windowWidth / 2, y, windowWidth / 2, y);
 }
 
-// Animation loop
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+
+    world = new p2.World();
+
+    let circleShape = new p2.Circle({ radius: 20 });
+    circleBody = new p2.Body({
+        mass: 1,
+        position: [0, 60],
+        angularVelocity: 10,
+    });
+    circleBody.addShape(circleShape);
+    world.addBody(circleBody);
+
+    let planeShape = new p2.Plane();
+    planeBody = new p2.Body();
+    planeBody.addShape(planeShape);
+    world.addBody(planeBody);
+}
+
 function draw() {
     background(255);
     translate(windowWidth / 2, windowHeight / 2);
